@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #pic { width: 150px; height: 150px; position: relative; left: 0; top: 0; }
+    </style>
+    <script>
+        let x = 0;
+        let y = 0;
+        const step = 20;
+        
+        function move(event){
+            switch (event.key){
+                case "ArrowRight":
+                    x += step; break;
+                case "ArrowLeft":
+                    x -= step; break;
+                case "ArrowUp":
+                    y -= step; break;
+                case "ArrowDown":
+                    y += step; break;
+            }
+            const pic = document.getElementById("pic");
+            pic.style.left = x + "px";
+            pic.style.top = y + "px";
+        }
+        function init(){
+            window.addEventListener("keydown",move);
+        }
+
+    </script>
+</head>
+<body onload="init()">
+    <img src="images/jo.png" id="pic">
+</body>
+</html>
