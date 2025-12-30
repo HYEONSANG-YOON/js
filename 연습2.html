@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Quiz-2</title>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 300px;
+    }
+    th, td {
+        border: 1px solid #333;
+        padding: 5px;
+        text-align: center;
+    }
+    a {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+    }
+</style>
+
+<script>
+    let userInfo = [
+        { id: 'aaa', name: '홍길동', age: 20 },
+        { id: 'bbb', name: '김개똥', age: 30 },
+        { id: 'ccc', name: '고길동', age: 40 }
+    ];
+
+    // 모든 회원 보기
+    function allUser() {
+        let html = `
+            <table>
+                <tr>
+                    <th>아이디</th>
+                    <th>이름</th>
+                    <th>나이</th>
+                </tr>
+        `;
+
+        userInfo.forEach(user => {
+            html += `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>
+                        <a onclick="showDetail('${user.id}')">${user.name}</a>
+                    </td>
+                    <td>${user.age}</td>
+                </tr>
+            `;
+        });
+
+        html += "</table>";
+        document.getElementById("table").innerHTML = html;
+    }
+
+    // 특정 회원 조회
+    function getUser() {
+        const id = document.getElementById("u_id").value;
+        const user = userInfo.find(u => u.id === id);
+
+        if (!user) {
+            alert("회원이 존재하지 않습니다");
+            return;
+        }
+
+        document.getElementById("table").innerHTML = `
+            아이디 : ${user.id}<br>
+            이름 : ${user.name}<br>
+            나이 : ${user.age}<br><br>
+            <button onclick="allUser()">모든 회원 보기</button>
+        `;
+    }
+
+    // 특정 회원 삭제
+    function userDelete() {
+        const id = document.getElementById("del_id").value;
+        const index = userInfo.findIndex(u => u.id === id);
+
+        if (index === -1) {
+            alert("삭제할 회원이 없습니다");
+            return;
+        }
+
+        userInfo.splice(index, 1);
+        allUser();
+    }
+
+    // 이름 클릭 → 개인 정보 보기
+    function showDetail(id) {
+        const user = userInfo.find(u => u.id === id);
+
+        document.getElementById("table").innerHTML = `
+            아이디 : ${user.id}<br>
+            이름 : ${user.name}<br>
+            나이 : ${user.age}<br><br>
+            <button onclick="allUser()">모든 회원 보기</button>
+        `;
+    }
+</script>
+</head>
+
+<body>
+    <div id="table">목록을 보여 줍니다</div>
+    <hr>
+
+    <button type="button" onclick="allUser()">모든 회원 보기</button>
+    <hr>
+
+    <input type="text" id="u_id" placeholder="input id">
+    <br>
+    <button type="button" onclick="getUser()">특정 회원 조회</button>
+    <hr>
+
+    <input type="text" id="del_id" placeholder="input id">
+    <br>
+    <button type="button" onclick="userDelete()">특정 회원 삭제</button>
+</body>
+</html>
