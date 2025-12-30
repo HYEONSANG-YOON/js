@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 이전/다음</title>
+    <style>
+        #viewer {
+            width: 200px;
+            text-align: center;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+        button {
+            margin-top: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="viewer">
+    <img id="img" src="images/test1.jpg">
+    <button onclick="prev()">이전 사진</button>
+    <button onclick="next()">다음 사진</button>
+</div>
+
+<script>
+    const imgArr = [
+        "images/test1.jpg",
+        "images/test2.jpg",
+        "images/test3.jpg",
+        "images/test4.jpg"
+    ];
+
+    let index = 0;
+
+    function prev() {
+        index--;
+        if (index < 0) {
+            index = imgArr.length - 1;
+        }
+        document.getElementById("img").src = imgArr[index];
+    }
+
+    function next() {
+        index++;
+        if (index >= imgArr.length) {
+            index = 0;
+        }
+        document.getElementById("img").src = imgArr[index];
+    }
+</script>
+
+</body>
+</html>
