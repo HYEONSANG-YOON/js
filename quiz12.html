@@ -113,6 +113,20 @@
         `;
         return table;
     }
+    const userDelete = () => {
+        const delId = document.getElementById("del_id");
+        /*
+        delId.value
+        userInfo = userInfo.filter( (user) => {
+            if( user['id'] !== delId.value ){
+                return user;
+            }
+        } );
+         */
+        userInfo = userInfo.filter( (user) => 
+            ( user['id'] !== delId.value ) ? user : undefined );
+        allUser();
+    }
     </script>
 </head>
 <body>
